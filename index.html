@@ -12,36 +12,53 @@
         body{
             background-color: rgb(17, 17, 17);
         }
-
+        
+        .banner-text{
+            text-align: center;
+            color: #b4aeae;
+            padding-top: 10vh;
+        }
+        .card {
+            background-color: #343232;
+        }
+        .card-text, .card-title {
+            color:  #b4aeae;
+            text-align: center;
+        }
         .card:hover{
             box-shadow: 0 0 20px #b4aeae;
         }
-        .crd-heading {
-            position: relative;
-            color: rgb(50, 46, 46);
-            
+        .play-container {
+            width: 100%;
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
         }
+    
 
     </style>
 </head>
 
 <body>
-    <main class=" container d-flex justify-content-center align-items-center" style="height: 95vh;">
-        <div class="card m-5" style="width: 18rem;">
-            <img src="./image/vscomputer.png" class="card-img-top" alt="player-vs-computer">
-            <div class="card-body">
-                <h5 class="card-title crd-heading">Player vs Computer</h5>
-                <p class="card-text">Play TicTacToe game against computer</p>
-                <a href="#" class="btn btn-primary">Play</a>
+    <main class=" container">
+        <div class= "banner " style="height: 15vh;"><h1 class="banner-text">Select Game Mode</h1></div>
+        <div class=" d-flex justify-content-center align-items-center" style="height: 80vh; ">
+            <div class="card m-5" style="width: 18rem;">
+                <img src="./image/vscomputer.png" class="card-img-top" alt="player-vs-computer">
+                <div class="card-body">
+                    <h5 class="card-title crd-heading">Player vs Computer</h5>
+                    <p class="card-text">Play TicTacToe game against computer</p>
+                    <div class="play-container"><a href="#" target="_blank" class="btn btn-outline-light">Play</a></div>
+                </div>
             </div>
-        </div>
-        <div class="card m-5" style="width: 18rem;">
-            <img src="./image/vscomputer.png" class="card-img-top" alt="player1-vs-player2">
-            <div class="card-body">
+            <div class="card m-5" style="width: 18rem;">
+                <img src="./image/playervsplayer.png" class="card-img-top" alt="player1-vs-player2">
+                <div class="card-body">
 
-                <h5 class="card-title">Player1 vs Player2</h5>
-                <p class="card-text">Play TicTacToe game against another player</p>
-                <a href="HumanvsHuman.html" target="_blank" class="btn btn-primary">Play</a>
+                    <h5 class="card-title">Player 1 vs Player 2</h5>
+                    <p class="card-text ">Play TicTacToe game against another player</p>
+                    <div class="play-container"><a href="HumanvsHuman.html" target="_blank" class="btn btn-outline-light play">Play</a></div>
+                </div>
             </div>
         </div>
     </main>
