@@ -8,14 +8,29 @@
     <title>TicTacToe</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <style>
+        body{
+            background-color: rgb(17, 17, 17);
+        }
+
+        .card:hover{
+            box-shadow: 0 0 20px #b4aeae;
+        }
+        .crd-heading {
+            position: relative;
+            color: rgb(50, 46, 46);
+            
+        }
+
+    </style>
 </head>
 
 <body>
-    <div class=" container d-flex justify-content-center align-items-center" style="height: 95vh;">
+    <main class=" container d-flex justify-content-center align-items-center" style="height: 95vh;">
         <div class="card m-5" style="width: 18rem;">
             <img src="./image/vscomputer.png" class="card-img-top" alt="player-vs-computer">
             <div class="card-body">
-                <h5 class="card-title">Player vs Computer</h5>
+                <h5 class="card-title crd-heading">Player vs Computer</h5>
                 <p class="card-text">Play TicTacToe game against computer</p>
                 <a href="#" class="btn btn-primary">Play</a>
             </div>
@@ -29,8 +44,10 @@
                 <a href="HumanvsHuman.html" target="_blank" class="btn btn-primary">Play</a>
             </div>
         </div>
-    </div>
-
+    </main>
+    <footer style="height: 5vh;">
+        <p class="text-center" style="color: #b4aeae;">IROSS GAMING 2023</p>
+    </footer>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
