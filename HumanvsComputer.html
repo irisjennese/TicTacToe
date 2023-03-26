@@ -5,11 +5,190 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Tic Tac Toe Game</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+  <style>
+
+    h1 {
+      color: antiquewhite;
+    }
+
+    .container-fluid {
+      display: flex;
+      height: 100vh;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: rgb(73, 74, 75);
+    }
+
+    table {
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    td {
+      border: 1px solid white;
+      width: 100px;
+      height: 100px;
+      text-align: center;
+      vertical-align: middle;
+      font-size: 48px;
+      cursor: pointer;
+    }
+
+    td:hover {
+      background-color: lightgray;
+    }
+
+    #message {
+      font-size: 24px;
+      font-weight: bold;
+      color: antiquewhite;
+    }
+  </style>
 </head>
 
 <body>
+  <div class="container-fluid">
+    <h1>Tic Tac Toe Game</h1>
+    <div id="counters">
+      <span id="player-win-count" class="badge rounded-pill text-bg-light">Player Wins: 0</span>
+      <span id="computer-win-count" class="badge rounded-pill text-bg-light">Computer Wins: 0</span>
+    </div>
+    <table id="board">
+      <tr>
+        <td id="0"></td>
+        <td id="1"></td>
+        <td id="2"></td>
+      </tr>
+      <tr>
+        <td id="3"></td>
+        <td id="4"></td>
+        <td id="5"></td>
+      </tr>
+      <tr>
+        <td id="6"></td>
+        <td id="7"></td>
+        <td id="8"></td>
+      </tr>
+    </table>
+    <p id="message"></p>
+    <button id="reset" class="btn btn-outline-light">Reset Game</button>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
+    crossorigin="anonymous"></script>
+  <script>
+    var board = ["", "", "", "", "", "", "", "", ""];
+    var human = "X";
+    var computer = "O";
+    var currentPlayer = human;
+    var gameOver = false;
+    var playerScore = document.getElementById('player-count');
+    var computerScore = document.getElementById('computer-count');
+    let playerWins = 0;
+    let computerWins = 0;
 
+    // Make player move
+    function playerMove(cell) {
+      if (!gameOver && board[cell] === "") {
+        board[cell] = currentPlayer;
+        document.getElementById(cell).innerHTML = currentPlayer;
+        if (currentPlayer === human) {
+          document.getElementById(cell).setAttribute("style", "background-color:#7EB6C3");
+        } else { document.getElementById(cell).setAttribute("style", "background-color:#DBF28F") }
+        checkForWinner();
+        currentPlayer = currentPlayer === human ? computer : human;
+
+        if (currentPlayer === computer && !gameOver) {
+          computerMove();
+        }
+
+      }
+    }
+
+    // Make computer move
+    function computerMove() {
+      var availableCells = [];
+      for (var i = 0; i < 9; i++) {
+        if (board[i] === "") {
+          availableCells.push(i);
+        }
+      }
+      var randomCell = availableCells[Math.floor(Math.random() * availableCells.length)];
+      playerMove(randomCell);
+    }
+
+    // Handle game over
+    function gameOverMessage(message) {
+      document.getElementById("message").innerHTML = message;
+      gameOver = true;
+    }
+
+    // Check for winner or tie
+    function checkForWinner() {
+      if ((board[0] === human && board[1] === human && board[2] === human) ||
+        (board[3] === human && board[4] === human && board[5] === human) ||
+        (board[6] === human && board[7] === human && board[8] === human) ||
+        (board[0] === human && board[3] === human && board[6] === human) ||
+        (board[1] === human && board[4] === human && board[7] === human) ||
+        (board[2] === human && board[5] === human && board[8] === human) ||
+        (board[0] === human && board[4] === human && board[8] === human) ||
+        (board[2] === human && board[4] === human && board[6] === human)) {
+        gameOverMessage("Congratulations, you won!");
+        playerWins++;
+        updateCounters()
+
+        console.log(playerWins)
+      } else if ((board[0] === computer && board[1] === computer && board[2] === computer) ||
+        (board[3] === computer && board[4] === computer && board[5] === computer) ||
+        (board[6] === computer && board[7] === computer && board[8] === computer) ||
+        (board[0] === computer && board[3] === computer && board[6] === computer) ||
+        (board[1] === computer && board[4] === computer && board[7] === computer) ||
+        (board[2] === computer && board[5] === computer && board[8] === computer) ||
+        (board[0] === computer && board[4] === computer && board[8] === computer) ||
+        (board[2] === computer && board[4] === computer && board[6] === computer)) {
+        gameOverMessage("Sorry, you lost!");
+        computerWins++;
+        updateCounters()
+      } else if (!board.includes("")) {
+        gameOverMessage("It's a tie!");
+      }
+    }
+
+    // Handle reset game
+    function resetGame() {
+      board = ["", "", "", "", "", "", "", "", ""];
+      for (var i = 0; i < 9; i++) {
+        document.getElementById(i).innerHTML = "";
+        document.getElementById(i).removeAttribute("style");
+      }
+      document.getElementById("message").innerHTML = "";
+      currentPlayer = human;
+      gameOver = false;
+    }
+
+    // Event listeners
+    document.getElementById("board").addEventListener("click", function (event) {
+      if (event.target.tagName === "TD") {
+        playerMove(event.target.id);
+      }
+    });
+
+    document.getElementById("reset").addEventListener("click", function () {
+      resetGame();
+    });
+
+    function updateCounters() {
+
+      let playerWinCount = document.getElementById("player-win-count");
+      let computerWinCount = document.getElementById("computer-win-count");
+      playerWinCount.innerHTML = "Player Wins: " + playerWins;
+      computerWinCount.innerHTML = "Computer Wins: " + computerWins;
+    }
+  </script>
 </body>
 
 </html>
